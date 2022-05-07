@@ -1,38 +1,38 @@
 #include "CompactPiece.h"
 
-#define COLOR_SHIFT_DEPTH 4
-#define PIECE_AND_VALUE 15
-
 CompactPiece::CompactPiece() {
-    pieceRepr = 0;
+    pieceType = 0;
+    pieceColor = 0;
 }
-//color||piece
-//  0000 0000
-//  1111 1111
 CompactPiece::CompactPiece(Color color, Piece piece) {
-    pieceRepr = (color << COLOR_SHIFT_DEPTH) | piece;
+    pieceType = piece;
+    pieceColor = color;
 }
 
-// Grab last 4 bits
-Color CompactPiece::getColor() {
-    return (Color) (pieceRepr >> COLOR_SHIFT_DEPTH);
+
+Color CompactPiece::getColor() const {
+    return (Color) pieceColor;
 }
 
-// Grab first 4 bits
-Piece CompactPiece::getPiece() {
-    return (Piece) (pieceRepr & PIECE_AND_VALUE);
+
+Piece CompactPiece::getPiece() const {
+    return (Piece) pieceType;
 }
 
-bool CompactPiece::operator==(int other) const {
-    return pieceRepr == other;
+bool CompactPiece::operator==(uint8_t other) const {
+    return this->toInt() == other;
 }
 
 uint8_t CompactPiece::toInt() const {
-    return pieceRepr;
+    return (pieceType | (pieceColor << CPIECE_BITFIELD_SIZE));
 }
 
 ColoredPiece CompactPiece::toColored() {
     return ColoredPiece(this->getColor(), this->getPiece());
+}
+
+bool CompactPiece::operator==(CompactPiece& other) const {
+    return pieceColor == other.pieceColor && pieceType == other.pieceType;
 }
 
 

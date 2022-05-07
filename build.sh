@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+rm ./gregchess
 mkdir build
 cd build/
 

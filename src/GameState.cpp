@@ -95,7 +95,7 @@ void GameState::parseFenToMailbox(string fen) {
                 int toSkip = atoi(&c);
                 int upper = jOut + toSkip;
                 for (; jOut < upper; ++jOut) {
-                    boardArr[i][jOut] = CompactPiece(Color::no_color, Piece::no_piece);
+                    boardArr[i][jOut] = CompactPiece();
                 }
             } else {
                 ColoredPiece cp = charToColoredPiece(c);

@@ -1,9 +1,14 @@
 #ifndef GREGCHESS_COORD_H
 #define GREGCHESS_COORD_H
 
+#include <cstdint>
+
+#define COORD_BITFIELD_SIZE 4
+
 class Coord {
 
-    unsigned int i_xy = 0b11111111;
+    uint8_t i_x : COORD_BITFIELD_SIZE;
+    uint8_t i_y : COORD_BITFIELD_SIZE;
 public:
     [[nodiscard]] unsigned int x() const;
 
